@@ -1,15 +1,15 @@
 <?php
 
-$t = new HundredFortySecondsRace();
+$t = new HundredFortySecondsRace(array('#CuandoHaceFrioYo', '#OkuluSevmemeNedenim'));
 $t->login('MsrAEqq42Bom767QusO4318PL', 'C3odEyJEEF4UrLFnoj44wtR8f0kWOjpyUS9Ytmp4wxF0RLs3Qw', '124289477-qNZe9IBb23YNOoL7r5bERIBkM0nV4d4jSr84dDzI', '7JnyD1Y1skRmdFJuH24LzywM2GJhjwsxsjp5TtZK1Hwd1');
-$t->start(array('#CuandoHaceFrioYo', '#OkuluSevmemeNedenim')); //hashtags
+$t->start();
 
 class HundredFortySecondsRace {
 
   private $dieAfter = 10;
 
-  private $p1Ponts = 0;
-  private $p2Ponts = 0;
+  private $player1;
+  private $player2;
 
   private $m_oauth_consumer_key;
   private $m_oauth_consumer_secret;
@@ -22,7 +22,14 @@ class HundredFortySecondsRace {
   private $m_oauth_timestamp;
   private $m_oauth_version = '1.0';
 
-  public function __construct() {
+  public function __construct($p1Hashtag, $p2Hashtag) {
+    
+    $this->player1->points = 0;
+    $this->player1->hashtag = $p1Hashtag;
+    
+    $this->player2->points = 0;
+    $this->player2->hashtag = $p2Hashtag;
+    
     //
     // set a time limit to unlimited
     //
@@ -59,6 +66,25 @@ class HundredFortySecondsRace {
     $_data["favorite_count"]
     $_data["entities"]
     */
+    
+    $player = null;
+    
+    foreach($_data["entities"]["hashtags"] as $hashtag){
+      if($hashtag->text == $this->player1->hashtag)
+        $player = $this->player1;
+      if($hashtag->text == $this->player2->hashtag)
+        $player = $this->player2;
+    }
+    
+    die("\nPlayer hash: ".$player->hashtag."\n\n");
+        
+    # 1 point/character
+    $player1->points += strlen($_data["text"]);
+    $player2->points += strlen($_data["text"]);
+    
+    # 10 points/retweet
+    $player1->points += $_data["retweet_count"] * 10;
+    $player2->points += $_data["retweet_count"] * 10;
     
     $this->dieAfter--;
         
@@ -180,7 +206,6 @@ class HundredFortySecondsRace {
             }
           }
         }
-      }
 
       fclose($fp);
       sleep(10);
