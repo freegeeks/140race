@@ -76,9 +76,9 @@ class HundredFortySecondsRace {
     $player = null;
 
     foreach($_data["entities"]["hashtags"] as $hash){
-      if($hash == $this->player1)
+      if($hash->text == $this->player1)
         $player = $this->player1;
-      if($hash == $this->player1)
+      if($hash->text == $this->player1)
         $player = $this->player2;
     }
     
