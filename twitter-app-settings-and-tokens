@@ -11,6 +11,6 @@ Tokens
 This access token can be used to make API requests on your own account's behalf. Do not share your access token secret with anyone.
 Access token  124289477-qNZe9IBb23YNOoL7r5bERIBkM0nV4d4jSr84dDzI
 Access token secret 7JnyD1Y1skRmdFJuH24LzywM2GJhjwsxsjp5TtZK1Hwd1
-Access level  Read and write
+Access level: Read and write
 Owner emersonestrella
 Owner ID  124289477
