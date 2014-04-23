@@ -1,16 +1,30 @@
 <?php
 
-$t = new HundredFortySecondsRace(array('#CuandoHaceFrioYo', '#OkuluSevmemeNedenim'));
+$t = new HundredFortySecondsRace(array('#CuandoHaceFrioYo', '#OkuluSevmemeNedenim')); //hashtags
 $t->login('MsrAEqq42Bom767QusO4318PL', 'C3odEyJEEF4UrLFnoj44wtR8f0kWOjpyUS9Ytmp4wxF0RLs3Qw', '124289477-qNZe9IBb23YNOoL7r5bERIBkM0nV4d4jSr84dDzI', '7JnyD1Y1skRmdFJuH24LzywM2GJhjwsxsjp5TtZK1Hwd1');
 $t->start();
 
+class Player {
+
+  private $_hash;
+  private $_points;
+
+  public function __construct($hash) {
+    $this->hash = $hash;
+  }
+  
+  public function setPoints($points) {
+    $this->points = $points;
+  }
+    
+};
+
 class HundredFortySecondsRace {
+  
+  private $_hashes;
 
   private $dieAfter = 10;
-
-  private $player1;
-  private $player2;
-
+  
   private $m_oauth_consumer_key;
   private $m_oauth_consumer_secret;
   private $m_oauth_token;
@@ -22,18 +36,18 @@ class HundredFortySecondsRace {
   private $m_oauth_timestamp;
   private $m_oauth_version = '1.0';
 
-  public function __construct($p1Hashtag, $p2Hashtag) {
-    
-    $this->player1->points = 0;
-    $this->player1->hashtag = $p1Hashtag;
-    
-    $this->player2->points = 0;
-    $this->player2->hashtag = $p2Hashtag;
-    
+  public function __construct($hashes) {
     //
     // set a time limit to unlimited
     //
     set_time_limit(0);
+
+    if(count($hashes) != 2)
+      die("We need 2 hashes!");
+
+    $this->_hashes = $hashes;
+    $this->player1 = new Player($hashes[0]);
+    $this->player2 = new Player($hashes[1]);
   }
 
   //
@@ -67,25 +81,6 @@ class HundredFortySecondsRace {
     $_data["entities"]
     */
     
-    $player = null;
-    
-    foreach($_data["entities"]["hashtags"] as $hashtag){
-      if($hashtag->text == $this->player1->hashtag)
-        $player = $this->player1;
-      if($hashtag->text == $this->player2->hashtag)
-        $player = $this->player2;
-    }
-    
-    die("\nPlayer hash: ".$player->hashtag."\n\n");
-        
-    # 1 point/character
-    $player1->points += strlen($_data["text"]);
-    $player2->points += strlen($_data["text"]);
-    
-    # 10 points/retweet
-    $player1->points += $_data["retweet_count"] * 10;
-    $player2->points += $_data["retweet_count"] * 10;
-    
     $this->dieAfter--;
         
     if($this->dieAfter <= 0)
@@ -97,7 +92,7 @@ class HundredFortySecondsRace {
   //
   // the main stream manager
   //
-  public function start(array $_keywords) {
+  public function start() {
     while (1) {
       $fp = fsockopen("ssl://stream.twitter.com", 443, $errno, $errstr, 30);
       if (!$fp) {
@@ -106,7 +101,7 @@ class HundredFortySecondsRace {
         //
         // build the data and store it so we can get a length
         //
-        $data = 'track=' . rawurlencode(implode($_keywords, ','));
+        $data = 'track=' . rawurlencode(implode($this->_hashes, ','));
 
         //
         // store the current timestamp
@@ -206,6 +201,8 @@ class HundredFortySecondsRace {
             }
           }
         }
+
+      }
 
       fclose($fp);
       sleep(10);
