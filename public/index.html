@@ -1,11 +1,15 @@
-<html>
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    var socket = io.connect('http://localhost');
-    socket.on('news', function (data) {
-      console.log(data);
-      socket.emit('my other event', { my: 'data' });
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script src="http://cdn.socket.io/stable/socket.io.js"></script>
+</head>
+<body>
+<script>
+    var socket = io.connect('http://87.233.237.82', 8888);
+    socket.on('connect', function (data) {
+      socket.emit('gimmehashtags', true);
     });
-  </script>
-  <h1>HELLO 2</h1>
+</script>
+</body>
 </html>
