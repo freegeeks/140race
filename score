@@ -18,6 +18,16 @@ favorite_count
 entities
   Entities which have been parsed out of the text of the Tweet
 
+    hashtags
+    symbols
+    urls
+    user_mentions
+    
+    media
+      media_url
+      type
+        Only photo for now
+
 coordinates
   Represents the geographic location of this Tweet
 
