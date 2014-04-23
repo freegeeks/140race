@@ -7,6 +7,7 @@ var twit = new twitter({
     access_token_secret: '7JnyD1Y1skRmdFJuH24LzywM2GJhjwsxsjp5TtZK1Hwd1'
 });
 
+/*
 twit.stream('statuses/sample', { language: 'en' }, function(stream) {
     stream.on('data', function(data) {
         if (data.entities.hashtags) {
@@ -17,17 +18,12 @@ twit.stream('statuses/sample', { language: 'en' }, function(stream) {
     });
     setTimeout(stream.destroy, 5000);
 });
-
-/*
-twit.stream('statuses/filter', { track:'android'}, function(stream) {
-    stream.on('data', function(data) {
-        if (data.lang == 'en') {
-                //console.log(util.inspect(data));
-                console.log(data.text);
-        }
-        
-    });
-    setTimeout(stream.destroy, 1000);
-});
 */
 
+twit.stream('statuses/filter', { language: 'en', track:'#android'}, function(stream) {
+    stream.on('data', function(data) {
+        //console.log(util.inspect(data));
+        console.log(data.text);
+    });
+    setTimeout(stream.destroy, 5000);
+});
