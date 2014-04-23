@@ -1,0 +1,13 @@
+{
+  "name": "hackbattle2014",
+  "version": "0.0.0",
+  "description": "hackbattle2014 ==============",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/renan/hackbattle2014.git"
+  },
+  "dependencies": {
+    "twitter": "0.2.9"
+  }
+}
