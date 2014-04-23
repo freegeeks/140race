@@ -1,8 +1,10 @@
 var util = require('util'),
   twitter = require('twitter'),
-  app = require('http').createServer(handler),
-  io = require('socket.io').listen(app),
   fs = require('fs');
+var express = require('express')
+  , app = express()
+  , server = require('http').createServer(app)
+  , io = require('socket.io').listen(server);
 
 var twit = new twitter({
   consumer_key :          'MsrAEqq42Bom767QusO4318PL',
@@ -38,6 +40,12 @@ var player2 = {
   points: 0
 };
 
+// Index
+app.get('/', function (req, res) {
+      res.sendfile(__dirname + '/public/index.html');
+});
+
+/*
 function handler(req, res) {
   fs.readFile(__dirname + '/public/index.html',
   function (err, data) {
@@ -49,15 +57,13 @@ function handler(req, res) {
     res.end(data);
   });
 }
+*/
 
-var server = app.listen(settings.app_port, function() {
-    console.log('Listening on port %d', server.address().port);
-});
-//var io = require('socket.io').listen(settings.websocket_port);
+server.listen(settings.app_port);
 
 io.sockets.on('connection', function (socket) {
   console.log("asdf");
-  clients[socket.id] = socket;
+  //clients[socket.id] = socket;
   /*
   if(clients.length < 2){
     socket.emit('waiting');
