@@ -16,7 +16,7 @@ twit.stream('statuses/sample', { language: 'en' }, function(stream) {
             }
         }
     });
-    setTimeout(stream.destroy, 5000);
+    setTimeout(stream.destroy, 15000);
 });
 */
 
@@ -25,5 +25,5 @@ twit.stream('statuses/filter', { language: 'en', track:'#android'}, function(str
         //console.log(util.inspect(data));
         console.log(data.text);
     });
-    setTimeout(stream.destroy, 5000);
+    setTimeout(stream.destroy, 15000);
 });
