@@ -2,9 +2,12 @@
 
 $t = new HundredFortySecondsRace();
 $t->login('MsrAEqq42Bom767QusO4318PL', 'C3odEyJEEF4UrLFnoj44wtR8f0kWOjpyUS9Ytmp4wxF0RLs3Qw', '124289477-qNZe9IBb23YNOoL7r5bERIBkM0nV4d4jSr84dDzI', '7JnyD1Y1skRmdFJuH24LzywM2GJhjwsxsjp5TtZK1Hwd1');
-$t->start(array('Congrats EXO', 'NBA Most Improved Player')); //hashtags
+$t->start(array('#CuandoHaceFrioYo', '#OkuluSevmemeNedenim')); //hashtags
 
 class HundredFortySecondsRace {
+
+  private $dieAfter = 10;
+
   private $p1Ponts = 0;
   private $p2Ponts = 0;
 
@@ -48,7 +51,20 @@ class HundredFortySecondsRace {
   //
   private function process_tweet(array $_data) {
     print_r($_data);
-    die("\n HUHUHUH! died!");
+    
+    /*
+    $_data["text"]
+    $_data["coordinates"]
+    $_data["retweet_count"]
+    $_data["favorite_count"]
+    $_data["entities"]
+    */
+    
+    $this->dieAfter--;
+        
+    if($this->dieAfter <= 0)
+      die("\n HUHUHUH! died!");
+
     //return true;
   }
 
