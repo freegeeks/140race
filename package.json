@@ -1,13 +1,14 @@
 {
-  "name": "hackbattle2014",
+  "name": "HundredFortySecondsRace",
   "version": "0.0.0",
-  "description": "hackbattle2014 ==============",
-  "main": "index.js",
+  "description": "140 seconds Twitter race game",
+  "main": "app.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/renan/hackbattle2014.git"
   },
   "dependencies": {
-    "twitter": "0.2.9"
+    "twitter": "0.2.9",
+    "socket.io": "*"
   }
 }
