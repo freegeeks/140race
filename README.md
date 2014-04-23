@@ -29,8 +29,7 @@ GStreaming API - right now - dataset
 REST API - past
 
 - Verisign
-getdns api
-getnameinfo
+http://getdnsapi.net/tnw.html
 
 - Sendgrid
 http://hack.sendgrid.com

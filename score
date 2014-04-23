@@ -1,0 +1,25 @@
+List of all fields: https://dev.twitter.com/docs/platform-objects/tweets
+
+text
+  The actual UTF-8 text of the status update
+
+retweeted
+  Indicates whether this Tweet has been retweeted by the authenticating user
+
+retweet_count
+  Number of times this Tweet has been retweeted
+
+favorited
+  Indicates whether this Tweet has been favorited by the authenticating user
+
+favorite_count
+  Indicates approximately how many times this Tweet has been "favorited" by Twitter users
+
+entities
+  Entities which have been parsed out of the text of the Tweet
+
+coordinates
+  Represents the geographic location of this Tweet
+
+
+
