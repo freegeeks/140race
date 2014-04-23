@@ -38,12 +38,16 @@ http://hack.sendgrid.com
 == IDEAS ==
 ===========
 
-Game Twitter
 
-Pattern recognition (threasure game)
-Get tweets around the stadium of soccer match
-Checklist/assignment get points
+- Game Twitter
+Twitter fueled race
 Game twitter feeding warrior
 Twitter scale phisics
+Twitter voting/deciding system
+
+Social Content Publishing
+Pattern recognition (threasure game)
+Checklist/assignment get points
 Kingskoop
 Know your artist
+
