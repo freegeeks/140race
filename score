@@ -2,34 +2,41 @@ List of all fields: https://dev.twitter.com/docs/platform-objects/tweets
 
 text
   The actual UTF-8 text of the status update
+  - 1 point/character
 
 retweeted
   Indicates whether this Tweet has been retweeted by the authenticating user
+  - 0 points
+  - If true retweet button is disabled
 
 retweet_count
   Number of times this Tweet has been retweeted
+  - 10 points/retweet
 
 favorited
   Indicates whether this Tweet has been favorited by the authenticating user
+  - 10 points/retweet
 
 favorite_count
   Indicates approximately how many times this Tweet has been "favorited" by Twitter users
+  - 20 points/favorite
 
 entities
   Entities which have been parsed out of the text of the Tweet
 
     hashtags
     symbols
+      - 1 point/symbol
     urls
+      - 3 points/url
     user_mentions
-    
+      - 5 points/mention
     media
+      - 8 points/media
       media_url
       type
         Only photo for now
 
 coordinates
   Represents the geographic location of this Tweet
-
-
-
+  - 2 points/media
