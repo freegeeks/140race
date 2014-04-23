@@ -71,7 +71,18 @@ class HundredFortySecondsRace {
   // process a tweet object from the stream
   //
   private function process_tweet(array $_data) {
-    print_r($_data);
+    //print_r($_data);
+
+    $player = null;
+
+    foreach($_data["entities"]["hashtags"] as $hash){
+      if($hash == $this->player1)
+        $player = $this->player1;
+      if($hash == $this->player1)
+        $player = $this->player2;
+    }
+    
+    die(">>>".$player->hash);
     
     /*
     $_data["text"]
@@ -82,7 +93,7 @@ class HundredFortySecondsRace {
     */
     
     $this->dieAfter--;
-        
+
     if($this->dieAfter <= 0)
       die("\n HUHUHUH! died!");
 
