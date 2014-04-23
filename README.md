@@ -49,3 +49,9 @@ Pattern recognition (threasure game)
 Checklist/assignment get points
 Kingskoop
 Know your artist
+
+
+== SSH ==
+=========
+
+ssh -p8922 freegeeks@true.renangoncalves.com
