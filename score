@@ -15,7 +15,7 @@ retweet_count
 
 favorited
   Indicates whether this Tweet has been favorited by the authenticating user
-  - 10 points/retweet
+  - 0 points
 
 favorite_count
   Indicates approximately how many times this Tweet has been "favorited" by Twitter users
@@ -25,8 +25,9 @@ entities
   Entities which have been parsed out of the text of the Tweet
 
     hashtags
+      - 4 points/hashtag
     symbols
-      - 1 point/symbol
+      - 2 point/symbol
     urls
       - 3 points/url
     user_mentions
@@ -39,4 +40,4 @@ entities
 
 coordinates
   Represents the geographic location of this Tweet
-  - 2 points/media
+  - 2 points

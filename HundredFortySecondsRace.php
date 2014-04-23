@@ -1,13 +1,13 @@
 <?php
 
-$t = new HundredFortySecondsRace(array('#CuandoHaceFrioYo', '#OkuluSevmemeNedenim')); //hashtags
-$t->login('MsrAEqq42Bom767QusO4318PL', 'C3odEyJEEF4UrLFnoj44wtR8f0kWOjpyUS9Ytmp4wxF0RLs3Qw', '124289477-qNZe9IBb23YNOoL7r5bERIBkM0nV4d4jSr84dDzI', '7JnyD1Y1skRmdFJuH24LzywM2GJhjwsxsjp5TtZK1Hwd1');
-$t->start();
+$game = new HundredFortySecondsRace(array('#CuandoHaceFrioYo', '#OkuluSevmemeNedenim')); //hashtags
+$game->login('MsrAEqq42Bom767QusO4318PL', 'C3odEyJEEF4UrLFnoj44wtR8f0kWOjpyUS9Ytmp4wxF0RLs3Qw', '124289477-qNZe9IBb23YNOoL7r5bERIBkM0nV4d4jSr84dDzI', '7JnyD1Y1skRmdFJuH24LzywM2GJhjwsxsjp5TtZK1Hwd1');
+$game->start();
 
 class Player {
 
-  private $_hash;
-  private $_points;
+  private $hash;
+  private $points;
 
   public function __construct($hash) {
     $this->hash = $hash;
@@ -16,14 +16,36 @@ class Player {
   public function setPoints($points) {
     $this->points = $points;
   }
+  
+  public function getPoints() {
+    return $this->points;
+  }
+  
+  public function getHash() {
+    return $this->hash;
+  }
     
 };
 
 class HundredFortySecondsRace {
   
-  private $_hashes;
+  private $scoring = Array(
+    "characters"    => 1,
+    "retweet"       => 10,
+    "favorite"      => 20,
+    "hashtag"       => 4,
+    "symbols"       => 2,
+    "urls"          => 3,
+    "user_mentions" => 5,    
+    "media"         => 8
+  );
 
-  private $dieAfter = 10;
+  private $dieAfter = 50;
+  
+  private $player1;
+  private $player2;
+  
+  private $_hashes;
   
   private $m_oauth_consumer_key;
   private $m_oauth_consumer_secret;
@@ -71,18 +93,51 @@ class HundredFortySecondsRace {
   // process a tweet object from the stream
   //
   private function process_tweet(array $_data) {
-    //print_r($_data);
-
+    
     $player = null;
 
     foreach($_data["entities"]["hashtags"] as $hash){
-      if($hash->text == $this->player1)
+      if($hash["text"] == str_replace("#", "", $this->player1->getHash())){
         $player = $this->player1;
-      if($hash->text == $this->player1)
+        break;
+      }
+      if($hash["text"] == str_replace("#", "", $this->player2->getHash())){
         $player = $this->player2;
+        break;
+      }
     }
-    
-    die(">>>".$player->hash);
+
+    $player->setPoints($player->getPoints() + (strlen($_data["text"]) * $this->scoring["characters"]));
+
+    if(!is_null($_data["coordinates"]))
+      $player->setPoints($player->getPoints() + $this->scoring["coordinates"]);
+
+    //retweets
+    $player->setPoints($player->getPoints() + ($_data["retweet_count"] * $this->scoring["retweet"]));
+
+    //favorites
+    $player->setPoints($player->getPoints() + ($_data["favorite_count"] * $this->scoring["favorite"]));
+
+    //hashtags
+    $player->setPoints($player->getPoints() + (count($_data["entities"]["hashtags"]) * $this->scoring["hashtag"]));
+
+    //symbols
+    $player->setPoints($player->getPoints() + (count($_data["entities"]["symbols"]) * $this->scoring["symbols"]));
+
+    //urls
+    $player->setPoints($player->getPoints() + (count($_data["entities"]["urls"]) * $this->scoring["urls"]));
+
+    //user_mentions
+    $player->setPoints($player->getPoints() + (count($_data["entities"]["user_mentions"]) * $this->scoring["user_mentions"]));
+
+    //user_mentions
+    if(isset($_data["entities"]["media"]))
+      $player->setPoints($player->getPoints() + (count($_data["entities"]["media"]) * $this->scoring["media"]));
+
+    echo "\nhash: ".$player->getHash()." (".$player->getPoints().")";
+
+    //if($_data["coordinates"])
+    //$player->setPoints( $player->getPoints() + strlen($_data["text"]));
     
     /*
     $_data["text"]
@@ -95,7 +150,9 @@ class HundredFortySecondsRace {
     $this->dieAfter--;
 
     if($this->dieAfter <= 0)
-      die("\n HUHUHUH! died!");
+      die("\nGAME OVER!\n\n".
+        $this->player1->getHash().": ".$this->player1->getPoints()."\n".
+        $this->player2->getHash().": ".$this->player2->getPoints())."\n\n";
 
     //return true;
   }
