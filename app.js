@@ -7,18 +7,14 @@ var twit = new twitter({
     access_token_secret: '7JnyD1Y1skRmdFJuH24LzywM2GJhjwsxsjp5TtZK1Hwd1'
 });
 
-/*
-app.get('/', twit.gatekeeper('/login'), routes.index);
-app.get('/login', routes.login);
-app.get('/twauth', twit.login());
-*/
-
 twit.get('/statuses/show/27593302936.json', {include_entities:true}, function(data) {
     console.log(util.inspect(data));
 });
 
-twit.stream('statuses/sample', function(stream) {
+twit.stream('statuses/filter', { track:'android'}, function(stream) {
     stream.on('data', function(data) {
         console.log(util.inspect(data));
     });
+    setTimeout(stream.destroy, 5000);
 });
+
