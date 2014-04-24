@@ -60,7 +60,7 @@
 
   var hashtag = location.pathname.substring(1);
 
-  var socket = io.connect('http://localhost', 8888);
+  var socket = io.connect(location.protocol + '//' + location.hostname, 8888);
   socket.on('connect', function () {
     socket.emit('gimmetweets', { hashtag: hashtag });
     startGame((new Date()).getTime());
