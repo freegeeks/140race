@@ -43,7 +43,14 @@ body, html {
 	width: 100%;
 	min-width: 300px;
 }
-
+body {
+	max-width: 320px;
+	margin: auto;
+}
+.wrap_body {
+	float: left;
+	width: 100%;
+}
 /* Disable iOS Users Select/Copy page content */
 #layout{
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
@@ -58,37 +65,88 @@ body, html {
 }
 /* reset */
 
-.login {
-	z-index: 102;
-	position: fixed;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	background: url(img/login.png) top center no-repeat;
-	background-size: 100%;
-	cursor: pointer;
-}
-.tap {
-	z-index: 101;
-	position: fixed;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-}
 
-header {
+
+
+.base {
+	z-index: 102;
 	width: 100%;
-	position: fixed;
-	top: 0;
-	left: 0;
+	height: 100%;
+	background: url(img/base.png) top center no-repeat;
+	background-size: 100%;
+	min-height: 500px;
+}
+.base .header {
+	min-height: 200px;
+}
+.header {
+	background: rgba(30, 30, 30, .95);
+	width: 100%;
+	float: left;
 	z-index: 99;
 	border-bottom: 2px solid #fff;
 	-webkit-box-shadow: 0px 5px 26px 0px rgba(0, 0, 0, 1);
 	-moz-box-shadow:    0px 5px 26px 0px rgba(0, 0, 0, 1);
 	box-shadow:         0px 5px 26px 0px rgba(0, 0, 0, 1);
 }
+.header .logo {
+	margin: auto;
+	display: table;
+	width: 50%;
+	margin: 25px auto;
+}
+.title {
+	color: #fff;
+	font-size: 2rem;
+	text-align: center;
+	display: block;
+}
+.title-s {
+	color: #fff;
+	font-size: 1.2rem;
+	width: 50%;
+	text-align: center;
+	display: block;
+	margin: auto;
+	padding-bottom: 20px;
+	clear: both;
+}
+
+.base .username {
+	width: 50%;
+	background: #4099ff;
+	border-radius: 6px;
+	padding: 6px 0;
+	margin: 5px auto 20px auto;
+	display: table;
+	color: #fff;
+	text-align: center;
+	font-size: 1.1rem;
+}
+
+
+
+
+
+
+.login-bt {
+	width: 50%;
+	background: #4099ff;
+	border-radius: 10px;
+	padding: 6px 0;
+	margin: auto;
+	display: table;
+	color: #fff;
+	text-align: center;
+	font-size: 1.4rem;
+	cursor: pointer;
+}
+
+
+
+
+
+/*  GAME   */
 section {
 	background: #5b5833;
 	float: left;
@@ -113,10 +171,6 @@ section {
 	background: url(img/track.png) repeat-y;
 	background-size: 100%;
 }
-
-
-
-
 .player_1 {
 	background: url(img/p1.png) no-repeat top center;
 	background-size: 100%;
@@ -135,8 +189,6 @@ section {
 	width: 80px;
 	height: 200px;
 	z-index: 100;
-
-
 }
 .p1_anim {
 	animation:         p_one 6s ease-out infinite;
@@ -178,8 +230,6 @@ section {
 	70%   { bottom: 20%; }
 	100%   { bottom: 15%; }
 }
-
-
 .userInfo {
 	float: left;
 	width: 40%;
@@ -191,8 +241,9 @@ section {
 .counter {
 	position: fixed;
 	width: 20%;
+	max-width: 160px;
 	background: url(img/counter.png) center no-repeat;
-	background-size: 100%;
+	background-size: 90%;
 	height: 100px;
 	left: 50%;
 	margin-left: -10%;
@@ -234,8 +285,6 @@ section {
 	text-align: center;
 	font-size: 1.3rem;
 }
-
-
 .user1 {
 	background: #4099ff;
 }
@@ -255,12 +304,17 @@ section {
 	border-radius: 6px;
 	padding: 5%;
 	color: #fff;
-
 }
+/*  GAME   */
 
 
 
 
+
+
+
+
+/*  PLAY   */
 .winner {
 	bottom: 140%;
  -webkit-transition: all .5s ease-in;
@@ -273,8 +327,6 @@ section {
        -moz-transition: all .9s ease-in;
          -o-transition: all .9s ease-in; 
 }
-
-
 .div_winner, .div_loser {
 	z-index: 101;
 	position: fixed;
@@ -287,11 +339,11 @@ section {
 	display: none;
 	text-align: center;
 }
-
 .div_winner span {
 	padding: 40px 20px;
 	margin: 50px auto 0 auto;
 	width: 70%;
+	max-width: 260px;
 	display: table;
 	color: #fff;
 	font-size: 2rem;
@@ -300,11 +352,11 @@ section {
 	padding-top: 180px;
 	border-radius: 10px;
 }
-
 .div_loser span{
 	padding: 40px 20px;
 	margin: 50px auto 0 auto;
 	width: 70%;
+	max-width: 260px;
 	display: table;
 	color: #fff;
 	font-size: 2rem;
@@ -312,4 +364,73 @@ section {
 	background-size: 50%;
 	padding-top: 180px;
 	border-radius: 10px;
+}
+/*  PLAY   */
+
+
+
+
+
+
+
+.preparing .users{
+	float: left;
+	width: 100%;
+	margin: -32px 0 50px 0;
+}
+.preparing .username {
+	width: 30%;
+	float: left;
+	margin: 5px 22px;
+	padding: 3px 10px;
+	font-size: .8rem;
+}
+.preparing .username:last-child {
+	background: #ffd400;
+}
+
+.preparing .x {
+	position: relative;
+	color: #fff;
+	width: 100%;
+	font-weight: bold;
+	font-size: 1.4rem;
+	text-align: center;
+}
+.preparing-counter {
+	width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	border: 3px solid #fff;
+	background: #222;
+	color: #fff;
+	font-weight: bold;
+	display: block;
+	line-height: 30px;
+	margin: 0 auto 15px auto;
+	text-align: center;
+	font-size: 1.3rem;
+}
+.preparing .title-s {
+	padding-bottom: 10px;
+}
+
+
+#hashtag a {
+	float: left;
+	padding: 20px 0;
+	border-bottom:1px solid #818181;
+	display: block;
+	color: #fff;
+	text-decoration: none;
+	width: 100%;
+	text-align: center;
+}
+
+
+
+
+
+.none {
+	display: none;
 }

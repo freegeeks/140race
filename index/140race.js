@@ -9,7 +9,7 @@ $(document).keyup(function(e) {
         //$( ".div_winner" ).show();
         
         setInterval(function() {
-            $( ".div_loser" ).fadeIn(500);
+            $( ".div_winner" ).delay(500).fadeIn(800);
         }, 300);      
 
       moveTrack("0", 60000)
@@ -32,7 +32,7 @@ function moveTrack(position, speedy) {
     var topPos = position.top
     console.log(topPos)
 
-    if ( topPos >= "-150" ) {
+    if ( topPos >= "-140" ) {
         $( ".track" ).css("bottom", "0%")
     }
 
@@ -50,12 +50,13 @@ setInterval(function() {
 
 
 
-$( ".login" ).on( "click", function() {
-    $( this ).slideUp();
+$( ".login-bt" ).on( "click", function() {
+    $( ".login" ).slideUp();
 
-  $( ".player_1" ).addClass("p1_anim");
-  $( ".player_2" ).addClass("p2_anim");
-  moveTrack("1400", 6000);
+    $( ".player_1" ).addClass("p1_anim");
+    $( ".player_2" ).addClass("p2_anim");
+    
+    moveTrack("1400", 6000);
 
 });
 
