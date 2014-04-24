@@ -72,13 +72,18 @@
       socket.emit('gimmetweets', { hashtag: hashtag });
   });
 
-    socket.on('tweet', function (data) {
-      el = document.createElement('p');
-      el.innerHTML = data.text;
-      $('#tweets').appendChild(el);
-      $('#tweets').scrollTop = document.querySelector('#tweets').scrollHeight;
-    });
+  socket.on('tweet', function (data) {
+    el = document.createElement('p');
+    el.innerHTML = data.text;
+    $('#tweets').appendChild(el);
+    $('#tweets').scrollTop = document.querySelector('#tweets').scrollHeight;
+  });
+
+  socket.on('score', function (data) {
+    $('#score').innerHTML = data.score;
+  });
   </script>
   <h1>140 seconds Twitter Race</h1>
+  <h2 id="score"></h2>
   <div id="tweets"></div>
 </html>

@@ -1,3 +1,18 @@
+var settings = {
+  app_port: 8888,
+  scoring: {
+    characters: 1,
+    retweet: 10,
+    favorite: 20,
+    hashtag: 4,
+    symbols: 2,
+    urls: 3,
+    coordinates: 4,
+    user_mentions: 5,
+    media: 8
+  }
+};
+
 var express = require('express')
   , app = express()
   , server = require('http').createServer(app)
@@ -10,7 +25,14 @@ var twit = new twitter({
     access_token_secret: '7JnyD1Y1skRmdFJuH24LzywM2GJhjwsxsjp5TtZK1Hwd1'
 });
 
-server.listen(8888);
+var twit2 = new twitter({
+  consumer_key :          'BaetqxrxhANvKaYf07LPFXgAi',
+  consumer_secret :       'OScCYvlkD1HZms4BLDYvdlLYlI7c2ebdIQpsSLOT6gkPd3nMb0',
+  access_token_key :      '20145613-Ak7hiWaraUvm8YZFBF5Lo3YsZuFOzxQ4PTDPq1D8n',
+  access_token_secret :   '7uMJxJvE7nJ7jxSzj0fl0rpCKmgU1oZDA4CT2fpAePUyG'
+});
+
+server.listen(settings.app_port);
 
 // Index
 app.get('/', function (req, res) {
@@ -48,10 +70,32 @@ io.sockets.on('connection', function (socket) {
 
     // When new hashtag joins
     socket.on('gimmetweets', function(data) {
-        socket.set('hashtag', data.hashtag, function () {});
-        twit.stream('statuses/filter', { language: 'en', track: data.hashtag}, function(stream) { 
+        socket.set('hashtag', data.hashtag);
+        socket.set('points', 0);
+        twit2.stream('statuses/filter', { language: 'en', track: data.hashtag}, function(stream) { 
           stream.on('data', function(data) {
-              socket.emit('tweet',  { text: data.text });
+              socket.get('points', function (err, points) {
+                  points += data.text.length * settings.scoring.characters;
+                  //retweets
+                  points += data.retweet_count * settings.scoring.retweet;
+                  //favorites
+                  points += data.favorite_count * settings.scoring.favorite;
+                  //hashtags
+                  points += data.entities.hashtags.length * settings.scoring.hashtag;
+                  //symbols
+                  points += data.entities.symbols.length * settings.scoring.symbols;
+                  //urls
+                  points += data.entities.urls.length * settings.scoring.urls;
+                  //user_mentions
+                  points += data.entities.user_mentions.length * settings.scoring.user_mentions;
+                  //media
+                  if (data.entities.media !== undefined) {
+                    points += data.entities.media.length * settings.scoring.media;
+                  }
+                  socket.set('points', points);
+                  socket.emit('score', { score: points });
+                  socket.emit('tweet',  { text: data.text });
+              });
           });
         });
     });
