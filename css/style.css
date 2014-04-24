@@ -73,7 +73,7 @@ body {
 	z-index: 102;
 	width: 100%;
 	height: 100%;
-	background: url(img/base.png) top center no-repeat;
+	background: url(../img/base.png) top center no-repeat;
 	background-size: 100%;
 	min-height: 500px;
 }
@@ -165,11 +165,11 @@ section {
 	width: 100%;
 	height: 2700px;
 	bottom: 0px;
-	background: url(img/track.png) repeat-y;
+	background: url(../img/track.png) repeat-y;
 	background-size: 100%;
 }
 .player_1 {
-	background: url(img/p1.png) no-repeat top center;
+	background: url(../img/p1.png) no-repeat top center;
 	background-size: 100%;
 	position: absolute;
 	left: 60px;
@@ -179,7 +179,7 @@ section {
 }
 
 .player_2 {
-	background: url(img/p2.png) no-repeat top center;
+	background: url(../img/p2.png) no-repeat top center;
 	background-size: 100%;
 	position: absolute;
 	right: 65px;
@@ -239,7 +239,7 @@ section {
 	position: fixed;
 	width: 20%;
 	max-width: 160px;
-	background: url(img/counter.png) center no-repeat;
+	background: url(../img/counter.png) center no-repeat;
 	background-size: 90%;
 	height: 60px;
 	left: 50%;
@@ -346,7 +346,7 @@ section {
 	display: table;
 	color: #fff;
 	font-size: 2rem;
-	background: url(img/trophy.png) no-repeat center 20px #4099ff;
+	background: url(../img/trophy.png) no-repeat center 20px #4099ff;
 	background-size: 50%;
 	padding-top: 180px;
 	border-radius: 10px;
@@ -359,7 +359,7 @@ section {
 	display: table;
 	color: #fff;
 	font-size: 2rem;
-	background: url(img/loser.png) no-repeat center 20px #c64c56;
+	background: url(../img/loser.png) no-repeat center 20px #c64c56;
 	background-size: 50%;
 	padding-top: 180px;
 	border-radius: 10px;

@@ -35,75 +35,30 @@
 		<div class="player_1"></div>
 		<div class="player_2"></div>
 		<div class="track"></div>	
+    <div id="tweets"></div>
 	</div>
 </section>
 </div>
 
+  <script src="js/jquery.min.js"></script>
+  <script src="js/140race.js"></script>
   <script>
-    /*
-    * Add JS here at the bottom of the page
-    * to avoid the whole document.ready since
-    * we are not using jquery
-    */
-
-    // Single DOM element selection
-    window.$ = function(selector) {
-      return document.querySelector(selector);
-    };
-
-    // Multiple DOM element selection
-    window.$$ = function(selector) {
-        var items = {};
-        var results = Array.prototype.slice.call(document.querySelectorAll(selector));
-        var length = results.length;
-        
-        for (var i = 0 ; i < length; i++) {
-            items[i] = results[i];
-        }
-        
-        items.length = length;
-        items.splice = [].splice();
-        
-        items.each = function(callback) {
-            for (var i = 0 ; i < length; i++) {
-                callback.call(items[i]);
-            }
-        };
-
-        items.on = function (event, fn) {
-            []['forEach'].call(this, function (el) {
-                el.on(event, fn);
-            });
-            return this;
-        };
-
-        return items;
-    };
-
-    // Bind event using "on"
-    Element.prototype.on = Element.prototype.addEventListener;
-    Element.prototype.trigger = function (type, data) {
-        var event = document.createEvent('HTMLEvents');
-        event.initEvent(type, true, true);
-        event.data = data || {};
-        event.eventName = type;
-        event.target = this;
-        this.dispatchEvent(event);
-        return this;
-    };
+  function startGame() {
+    moveTrack(-1928);
+  }
 
   var hashtag = location.pathname.substring(1);
 
   var socket = io.connect('http://localhost', 8888);
   socket.on('connect', function () {
       socket.emit('gimmetweets', { hashtag: hashtag });
+      startGame();
   });
 
   socket.on('tweet', function (data) {
-    el = document.createElement('p');
-    el.innerHTML = data.text;
-    $('#tweets').appendChild(el);
-    $('#tweets').scrollTop = document.querySelector('#tweets').scrollHeight;
+    var tweet = $('<p />').text(data.text);
+    $('#tweets').append(tweet);
+    $('#tweets')[0].scrollTop = document.querySelector('#tweets').scrollHeight;
   });
 
   socket.on('score', function (data) {

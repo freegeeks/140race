@@ -21,7 +21,6 @@ function moveTrack(bottom) {
       moveTrack(bottom);
     });
 };
-moveTrack(-1928);
 
 
 $( ".login-bt" ).on( "click", function() {
