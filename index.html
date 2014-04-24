@@ -80,12 +80,6 @@
       el = document.createElement('a');
       el.href = '/'+data.text;
       el.innerHTML = '#'+data.text;
-      /*
-      el.onclick = function () {
-        socket.emit('usethishashtag', { hashtag: this.innerHTML.replace('#', '') });
-        $('#hashtag').innerHTML = this.innerHTML;
-      };
-      */
       $('#hashtags').appendChild(el);
       $('#hashtags').scrollTop = document.querySelector('#hashtags').scrollHeight;
     });
