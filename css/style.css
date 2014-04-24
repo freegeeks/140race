@@ -163,8 +163,8 @@ section {
 .track {
 	position:absolute;
 	width: 100%;
-	height: 2000px;
-	bottom: -30px;
+	height: 2700px;
+	bottom: 0px;
 	background: url(img/track.png) repeat-y;
 	background-size: 100%;
 }

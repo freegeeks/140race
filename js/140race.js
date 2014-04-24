@@ -13,16 +13,15 @@ $(document).keyup(function(e) {
 });
 
 
-function moveTrack() {
+function moveTrack(bottom) {
     var track = $('.track');
-    var bottom = track.parent().height() - track.height();
 
-    track.css('bottom', '-30px');
+    track.css('bottom', '0px');
     track.animate({bottom: bottom}, 6000, 'linear', function() {
-      moveTrack();
+      moveTrack(bottom);
     });
 };
-moveTrack();
+moveTrack(-1928);
 
 
 $( ".login-bt" ).on( "click", function() {
