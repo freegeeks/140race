@@ -56,6 +56,10 @@
       document.querySelector('#hashtags').style.display = 'none';
       document.querySelector('#tweets').style.display = 'none';
     });
+
+    socket.on('points', function (data) {
+      console.log(data);
+    });
   </script>
   <h1>140 seconds Twitter Race</h1>
   <h2 id="hashtag"></h2>
