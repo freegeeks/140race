@@ -1,0 +1,278 @@
+/*
+	HackBattle 140 Rce
+	2014
+*/
+
+/* reset */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  position: relative;
+  font-family: 'bariol_regular', Arial;
+  -webkit-tap-highlight-color: transparent;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section{display: block;}
+ul{list-style: none;}
+a{text-decoration: none;}
+@font-face {
+	font-family: 'bariol_regular';
+	src: url('/bariol_regular-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+    font-family: 'bariol_bold';
+    src: url('/bariol_bold-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+body, html {
+	width: 100%;
+	min-width: 300px;
+}
+
+/* Disable iOS Users Select/Copy page content */
+#layout{
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+	tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+::selection { background: transparent; }
+::-moz-selection { background: transparent; }
+ /* Exceptions for forms */
+.searchBox input, #login-form {
+	-webkit-touch-callout: normal;
+    -webkit-user-select: normal;
+}
+/* reset */
+
+
+
+.login {
+	z-index: 102;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: url(img/login.png) top center no-repeat;
+	background-size: 100%;
+	cursor: pointer;
+}
+
+.tap {
+	z-index: 101;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+
+
+header {
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 99;
+	border-bottom: 2px solid #fff;
+	-webkit-box-shadow: 0px 5px 26px 0px rgba(0, 0, 0, 1);
+	-moz-box-shadow:    0px 5px 26px 0px rgba(0, 0, 0, 1);
+	box-shadow:         0px 5px 26px 0px rgba(0, 0, 0, 1);
+}
+
+
+section {
+	background: #5b5833;
+	float: left;
+	margin-top: 100px;
+	width: 100%;
+	position: fixed;
+	overflow: hidden;
+	height: 100%;
+}
+.track-wrap {
+    position:relative;
+    width:300px;
+    margin: auto;
+    height: 100%;
+    overflow:hidden;
+}
+.track {
+	position:absolute;
+	width: 100%;
+	height: 2000px;
+	bottom: -30px;
+	background: url(img/track.png) repeat-y;
+	background-size: 100%;
+}
+
+
+
+@keyframes track-bg {
+from { top: -100%; }
+    to { top: 0; }
+}
+
+
+
+/*
+@-webkit-keyframes track-bg {
+from { top: -300px; }
+    to { top: 0; }
+}
+@-moz-keyframes track-bg {
+from { top: -300px; }
+    to { top: 0; }
+}
+@-o-keyframes track-bg {
+from { top: -300px; }
+    to { top: 0; }
+}
+@keyframes track-bg {
+from { top: -300px; }
+    to { top: 0; }
+}
+*/
+
+
+
+
+.player_1 {
+	background: url(img/p1.png) no-repeat top center;
+	background-size: 100%;
+	position: absolute;
+	left: 60px;
+	width: 80px;
+	height: 200px;
+	z-index: 100;
+
+	animation:         p_one 6s ease-out infinite;
+	-webkit-animation: p_one 6s ease-out infinite;
+	-moz-animation:    p_one 6s ease-out infinite;
+	-o-animation:      p_one 6s ease-out infinite;
+}
+
+.player_2 {
+	background: url(img/p2.png) no-repeat top center;
+	background-size: 100%;
+	position: absolute;
+	right: 65px;
+	width: 80px;
+	height: 200px;
+	z-index: 100;
+
+	animation:         p_two 6s ease-out infinite;
+	-webkit-animation: p_two 6s ease-out infinite;
+	-moz-animation:    p_two 6s ease-out infinite;
+	-o-animation:      p_two 6s ease-out infinite;
+}
+
+
+@keyframes p_one {
+	0%   { bottom: 15%; }
+	10%   { bottom: 20%; }
+	30%   { bottom: 15%; }
+	80%   { bottom: 25%; }
+	100%   { bottom: 15%; }
+}
+@keyframes p_two {
+	0%   { bottom: 15%; }
+	10%   { bottom: 30%; }
+	30%   { bottom: 15%; }
+	70%   { bottom: 20%; }
+	100%   { bottom: 15%; }
+}
+
+
+
+@-webkit-keyframes p_one {
+	0%   { bottom: 15%; }
+	10%   { bottom: 20%; }
+	30%   { bottom: 15%; }
+	80%   { bottom: 25%; }
+	100%   { bottom: 15%; }
+}
+
+@-webkit-keyframes p_two {
+	0%   { bottom: 15%; }
+	10%   { bottom: 30%; }
+	30%   { bottom: 15%; }
+	70%   { bottom: 20%; }
+	100%   { bottom: 15%; }
+}
+
+
+.userInfo {
+	float: left;
+	width: 40%;
+	padding: 3% 5%;
+	color: #fff;
+	text-align: center;
+	font-size: .7rem;
+}
+.score {
+	text-align: center;
+	width: 100%;
+}
+.userInfo:nth-child(2) .score{
+	float: left;
+	margin-right: 10px;
+	}
+.username {
+	width: 100%;
+	display: block;
+	font-size: .9rem;
+}
+.speed {
+	width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	border: 5px solid #fa0000;
+	background: #fff;
+	color: #000;
+	font-weight: bold;
+	display: block;
+	line-height: 30px;
+	margin: 5px auto;
+	text-align: center;
+	font-size: 1.3rem;
+}
+
+
+.user1 {
+	background: #4099ff;
+}
+
+.user2 {
+	background: #c64c56;
+}
+
+
+.twitter {
+	width: 45%;
+	background: rgba(255, 212, 0, .2);
+	display: none;
+	position: absolute;
+	left: 50%;
+	margin-left: -27%;
+	z-index: 103;
+	font-size: .7rem;
+	border-radius: 6px;
+	padding: 5%;
+	color: #fff;
+
+}
