@@ -46,6 +46,7 @@ body, html {
 body {
 	max-width: 320px;
 	margin: auto;
+	overflow: hidden;
 }
 .wrap_body {
 	float: left;
@@ -76,9 +77,7 @@ body {
 	background-size: 100%;
 	min-height: 500px;
 }
-.base .header {
-	min-height: 200px;
-}
+
 .header {
 	background: rgba(30, 30, 30, .95);
 	width: 100%;
@@ -114,10 +113,8 @@ body {
 
 .base .username {
 	width: 50%;
-	background: #4099ff;
-	border-radius: 6px;
 	padding: 6px 0;
-	margin: 5px auto 20px auto;
+	margin: 5px auto 0 auto;
 	display: table;
 	color: #fff;
 	text-align: center;
@@ -233,7 +230,7 @@ section {
 .userInfo {
 	float: left;
 	width: 40%;
-	padding: 3% 5%;
+	padding: 0 5% 3% 5%;
 	color: #fff;
 	text-align: center;
 	font-size: .7rem;
@@ -244,18 +241,20 @@ section {
 	max-width: 160px;
 	background: url(img/counter.png) center no-repeat;
 	background-size: 90%;
-	height: 100px;
+	height: 60px;
 	left: 50%;
 	margin-left: -10%;
 	z-index: 104;
-	line-height: 110px;
+	line-height: 67px;
 	text-align: center;
 	font-size: 1.5rem;
 	font-weight: bold;
+	top: 40px;
 }
 .score {
 	text-align: center;
 	width: 100%;
+	font-size: 1rem;
 }
 
 .userInfo:nth-child(2) {
@@ -384,6 +383,8 @@ section {
 	margin: 5px 22px;
 	padding: 3px 10px;
 	font-size: .8rem;
+	background: #4099ff;
+	border-radius: 6px;
 }
 .preparing .username:last-child {
 	background: #ffd400;

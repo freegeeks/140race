@@ -20,6 +20,18 @@ $(document).keyup(function(e) {
 });
 
 
+$(document).keyup(function(e) {
+      if (e.keyCode == 48) {  // enter
+
+        $( ".player_1" ).addClass("p1_anim");
+        $( ".player_2" ).addClass("p2_anim");
+
+      } 
+});
+
+
+
+
 
 function moveTrack(position, speedy) {
 
