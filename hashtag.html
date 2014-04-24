@@ -63,6 +63,10 @@
   var socket = io.connect('http://localhost', 8888);
   socket.on('connect', function () {
       socket.emit('gimmetweets', { hashtag: hashtag });
+<<<<<<< HEAD
+=======
+      startGame((new Date()).getTime());
+>>>>>>> c374176e0cff1f505f8df932f1d6f27af6bef980
   });
 
   socket.on('tweet', function (data) {
@@ -74,6 +78,10 @@
   socket.on('score', function (data) {
     $('.user1 .score').html(parseInt(data.score));
     $('.user2 .score').html(parseInt(data.o_score));
+    var playerOneTop = parseInt($('.player_1').css('top'), 10);
+    var playerTwoTop = parseInt($('.player_2').css('top'), 10);
+    $('.player_1').css('top', playerOneTop - parseInt(data.score));
+    $('.player_2').css('top', playerTwoTop - parseInt(data.o_score));
   });
   </script>
   </body>
