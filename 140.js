@@ -120,7 +120,7 @@ io.sockets.on('connection', function (socket) {
                       }
 
                       socket.set('points', points);
-                      socket.emit('score', { score: points, o_score: o_points });
+                      socket.emit('score', { score: points / 1000, o_score: o_points / 1000 });
                       socket.emit('tweet',  { text: data.text });
                   });
               }
