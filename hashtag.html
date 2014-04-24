@@ -18,9 +18,7 @@
 		<span class="speed p1">74</span>
 		<span class="score">5234</span>
 	</div>
-	<div class="counter">
-		140
-	</div>
+	<div id="score" class="counter">0</div>
 	<div class="userInfo user2">
 		<span class="username">#renansaddam</span>
 		<span class="speed p2">45</span>
@@ -62,7 +60,7 @@
   });
 
   socket.on('score', function (data) {
-    $('#score').innerHTML = data.score;
+    $('#score').html(data.score);
   });
   </script>
   </body>
