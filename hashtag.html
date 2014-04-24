@@ -72,11 +72,11 @@
       var playerOnePoints = parseInt($('.user1 .score').html(), 10);
       var playerTwoPoints = parseInt($('.user1 .score').html(), 10);
 
-      $('.base').addClass('none');
+      $('.base').hide();
       if (playerOnePoints > playerTwoPoints) {
-        $('.winner').removeClass('none');
+        $('.winner').show();
       } else {
-        $('.loser').removeClass('none');
+        $('.winner').show();
       }
     }
   }
