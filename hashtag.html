@@ -49,11 +49,13 @@
   function trackTime(startTime, totalTime) {
     var difference = ((new Date()).getTime() - startTime) / 1000;
     var timeLeft = Math.ceil(totalTime - difference);
-    $('#timer').html(timeLeft);
+    if (timeLeft >= 0) {
+      $('#timer').html(timeLeft);
 
-    setTimeout(function() {
-      trackTime(startTime, totalTime);
-    }, 1000 / 60);
+      setTimeout(function() {
+        trackTime(startTime, totalTime);
+      }, 1000 / 60);
+    }
   }
 
   var hashtag = location.pathname.substring(1);
@@ -71,7 +73,8 @@
   });
 
   socket.on('score', function (data) {
-    $('#score').html(data.score);
+    $('.user1 .score').html(data.score);
+    $('.user2 .score').html(data.o_score);
   });
   </script>
   </body>
