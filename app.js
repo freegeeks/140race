@@ -20,7 +20,6 @@ var twit2 = new twitter({
 
 var settings = {
   app_port: 7777,
-  websocket_port: 80,
   scoring: {
     characters: 1,
     retweet: 10,
