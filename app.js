@@ -11,6 +11,13 @@ var twit = new twitter({
   access_token_secret :   '7JnyD1Y1skRmdFJuH24LzywM2GJhjwsxsjp5TtZK1Hwd1'
 });
 
+var twit2 = new twitter({
+  consumer_key :          'BaetqxrxhANvKaYf07LPFXgAi',
+  consumer_secret :       'OScCYvlkD1HZms4BLDYvdlLYlI7c2ebdIQpsSLOT6gkPd3nMb0',
+  access_token_key :      '20145613-Ak7hiWaraUvm8YZFBF5Lo3YsZuFOzxQ4PTDPq1D8n',
+  access_token_secret :   '7uMJxJvE7nJ7jxSzj0fl0rpCKmgU1oZDA4CT2fpAePUyG'
+});
+
 var settings = {
   app_port: 7777,
   websocket_port: 80,
@@ -53,7 +60,7 @@ io.sockets.on('connection', function (socket) {
               //io.sockets.emit('racing');
               console.log('racing: #'+p1Hash+' vs #'+p2Hash);
 
-              twit.stream('statuses/filter', { language: 'en', track: p1Hash+','+p2Hash}, function(stream) {            
+              twit2.stream('statuses/filter', { language: 'en', track: p1Hash+','+p2Hash}, function(stream) {            
                 stream.on('data', function(data) {
                   if((data.text !== undefined)&&(data.entities.hashtags.length > 0)) {
                     c = null;
@@ -61,7 +68,6 @@ io.sockets.on('connection', function (socket) {
                       if(data.entities.hashtags[key].text.toLowerCase() == p1Hash.toLowerCase()){
                         clients[0].get('points', function (err, p) {
                           points = p + (data.text.length * settings.scoring.characters);
-                          /*
                           //retweets
                           points += data.retweet_count * settings.scoring.retweet;
                           //favorites
@@ -77,15 +83,31 @@ io.sockets.on('connection', function (socket) {
                           //media
                           if(data.entities.media !== undefined)
                             points += data.entities.media.length * settings.scoring.media;
-                          */
                           clients[0].set('points', points);
+                          clients[0].emit('tweet', {data: data});
                           console.log(p1Hash+': '+points);
                         });
                       }
                       else if(data.entities.hashtags[key].text.toLowerCase() == p2Hash.toLowerCase()){
                         clients[1].get('points', function (err, p) {
                           points = p + (data.text.length * settings.scoring.characters);
+                          //retweets
+                          points += data.retweet_count * settings.scoring.retweet;
+                          //favorites
+                          points += data.favorite_count * settings.scoring.favorite;
+                          //hashtags
+                          points += data.entities.hashtags.length * settings.scoring.hashtag;
+                          //symbols
+                          points += data.entities.symbols.length * settings.scoring.symbols;
+                          //urls
+                          points += data.entities.urls.length * settings.scoring.urls;
+                          //user_mentions
+                          points += data.entities.user_mentions.length * settings.scoring.user_mentions;
+                          //media
+                          if(data.entities.media !== undefined)
+                            points += data.entities.media.length * settings.scoring.media;
                           clients[1].set('points', points);
+                          clients[1].emit('tweet', {data: data});
                           console.log(p2Hash+': '+points);
                         });
                       }
@@ -120,7 +142,7 @@ io.sockets.on('connection', function (socket) {
             }
           }
         });
-        setTimeout(stream.destroy, 10000);
+        //setTimeout(stream.destroy, 10000);
       });
      
     }
