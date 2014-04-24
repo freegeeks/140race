@@ -1,10 +1,8 @@
 var util = require('util'),
   twitter = require('twitter'),
+  app = require('http').createServer(handler),
+  io = require('socket.io').listen(app),
   fs = require('fs');
-var express = require('express')
-  , app = express()
-  , server = require('http').createServer(app)
-  , io = require('socket.io').listen(server);
 
 var twit = new twitter({
   consumer_key :          'MsrAEqq42Bom767QusO4318PL',
@@ -25,27 +23,13 @@ var settings = {
     urls: 3,
     user_mentions: 5,
     media: 8
-  }
+  },
+  p1Hash: null,
+  p2Hash: null
 };
 
-var clients = {};
+var clients = [];
 
-var player1 = {
-  hash: null,
-  points: 0
-};
-
-var player2 = {
-  hash: null,
-  points: 0
-};
-
-// Index
-app.get('/', function (req, res) {
-      res.sendfile(__dirname + '/public/index.html');
-});
-
-/*
 function handler(req, res) {
   fs.readFile(__dirname + '/public/index.html',
   function (err, data) {
@@ -57,56 +41,84 @@ function handler(req, res) {
     res.end(data);
   });
 }
-*/
 
-server.listen(settings.app_port);
+app.listen(settings.app_port);
 
 io.sockets.on('connection', function (socket) {
-  console.log("asdf");
-  //clients[socket.id] = socket;
-  /*
+  console.log("clients: "+clients.length);
   if(clients.length < 2){
-    socket.emit('waiting');
-  }
-  else if(clients.length == 2){
-    socket.emit('get-ready');
-  }else{
-    socket.disconnect();
-  }
-  */
-});
+    clients.push(socket);
 
-/*
-twit.stream('statuses/sample', {
-  language : 'en'
-}, function(stream) {
-  stream.on('data', function(data) {
-    if (data.text !== undefined) {
-      if (data.entities.hashtags) {
-        for (key in data.entities.hashtags) {
-          //io.sockets.emit('hello 123');
-          //io.sockets.emit('something', {asdf: data.entities.hashtags[key].text});
-          //console.log("hash> " + data.entities.hashtags[key].text);
+    console.log("connected: "+socket.id);
+    console.log("clients: "+clients.length);
+
+    //clients[socket.id] = socket;
+
+    socket.on('changeHash', function(data){
+      console.log("changeHash");
+      console.log(data);
+      socket.set('hash', data.newHash);
+      changeHashes();
+    });
+
+    if(clients.length < 2){
+      socket.emit('waiting');
+    }
+    else if(clients.length == 2){
+      io.sockets.emit('go');
+
+      twit.stream('statuses/sample', {
+        language : 'en'
+      }, function(stream) {
+        stream.on('data', function(data) {
+          if (data.text !== undefined) {
+            if (data.entities.hashtags) {
+              for (key in data.entities.hashtags) {
+                io.sockets.emit('hashtag', {text: data.entities.hashtags[key].text});
+              }
+            }
+          }
+        });
+        setTimeout(stream.destroy, 15000);
+      });
+
+    }
+
+    socket.on('disconnect', function(){
+      console.log(socket.id+' disconnected');
+      for(i=0; i<clients.length; ++i) {
+        console.log(clients[i].id);
+        if(clients[i].id == socket.id){
+          clients.splice(i, 1);
         }
       }
+      console.log("clients: "+clients.length);
+      io.sockets.emit('waiting');
+    });
+
+  }else{
+    console.log("2 players only demo");
+  }
+});
+
+function changeHashes(){
+  clients[0].get('hash', function (err, p1Hash) {
+    if(p1Hash!=null){
+      clients[1].get('hash', function (err, p2Hash) {
+        if(p2Hash!=null){
+          io.sockets.emit('racing');
+
+          console.log(p1Hash+','+p2Hash);
+
+          twit.stream('statuses/filter', { language: 'en', track: p1Hash+','+p2Hash}, function(stream) {
+              stream.on('data', function(data) {
+                io.sockets.emit('tweet', {data: data});
+              });
+              setTimeout(stream.destroy, 15000);
+          });
+
+        }
+      });
     }
   });
-  //setTimeout(stream.destroy, 15000);
-});
-*/
-
-
-/*
-twit.stream('statuses/filter', {
-  language : 'en',
-  track : '#android'
-}, function(stream) {
-  stream.on('data', function(data) {
-    if (data.text !== undefined) {
-      //console.log(util.inspect(data));
-      console.log("tweet> " + data.text);
-    }
-  });
-  setTimeout(stream.destroy, 15000);
-});
-*/
+}
