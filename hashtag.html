@@ -16,13 +16,13 @@
 	<div class="userInfo user1">
 		<span class="username">#android</span>
 		<span class="speed p1">0</span>
-		<span class="score">0</span>
+		<span class="score">&nbsp;</span>
 	</div>
 	<div id="timer" class="counter">14</div>
 	<div class="userInfo user2">
 		<span class="username">#apple</span>
 		<span class="speed p2">0</span>
-		<span class="score">0</span>
+		<span class="score">&nbsp;</span>
 	</div>
 </div>
 <section>
@@ -96,8 +96,8 @@
   });
 
   socket.on('score', function (data) {
-    $('.user1 .score').html(parseInt(data.score));
-    $('.user2 .score').html(parseInt(data.o_score));
+    $('.user1 .speed').html(parseInt(data.score));
+    $('.user2 .speed').html(parseInt(data.o_score));
     
     var playerOneTop = parseInt($('.player_1').css('top'), 10);
     var playerTwoTop = parseInt($('.player_2').css('top'), 10);
