@@ -11,7 +11,7 @@
 
 <div class="base">
 
-<div class="login none">
+<div class="login">
 	<div class="header">
 		<img src="/img/logo.png" class="logo">
 		<span class="login-bt">Login</span>
@@ -27,7 +27,7 @@
 	</div>
 </div>
 
-<div class="preparing">
+<div class="preparing none">
 	<div class="header">
 		<img src="/img/logo.png" class="logo">
 		<p class="x"> X </p>
@@ -49,71 +49,33 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/js/140race.js"></script>
 <script>
-  /*
-  * Add JS here at the bottom of the page
-  * to avoid the whole document.ready since
-  * we are not using jquery
-  */
+    // click play and start to wait
+    $('.login-bt').on('click', function () {
 
-  // Single DOM element selection
-  window.$ = function(selector) {
-    return document.querySelector(selector);
-  };
+        $('.login').addClass('none');
+        $('.welcome').removeClass('none');
+        $('.preparing').addClass('none');
 
-  // Multiple DOM element selection
-  window.$$ = function(selector) {
-      var items = {};
-      var results = Array.prototype.slice.call(document.querySelectorAll(selector));
-      var length = results.length;
-      
-      for (var i = 0 ; i < length; i++) {
-          items[i] = results[i];
-      }
-      
-      items.length = length;
-      items.splice = [].splice();
-      
-      items.each = function(callback) {
-          for (var i = 0 ; i < length; i++) {
-              callback.call(items[i]);
-          }
-      };
+        var socket = io.connect('http://localhost', 8888);
+        // waiting is over
+        socket.on('go', function () {
+            $('.login').addClass('none');
+            $('.welcome').addClass('none');
+            $('.preparing').removeClass('none');
 
-      items.on = function (event, fn) {
-          []['forEach'].call(this, function (el) {
-              el.on(event, fn);
-          });
-          return this;
-      };
+            socket.emit('gimmehashtags');
 
-      return items;
-  };
+            socket.on('hashtag', function (data) {
+              el = document.createElement('a');
+              el.href = '/'+data.text;
+              el.innerHTML = '#'+data.text;
+              $('#hashtags').appendChild(el);
+              $('#hashtags').scrollTop = document.querySelector('#hashtags').scrollHeight;
+            });
 
-  // Bind event using "on"
-  Element.prototype.on = Element.prototype.addEventListener;
-  Element.prototype.trigger = function (type, data) {
-      var event = document.createEvent('HTMLEvents');
-      event.initEvent(type, true, true);
-      event.data = data || {};
-      event.eventName = type;
-      event.target = this;
-      this.dispatchEvent(event);
-      return this;
-  };
+        });
 
-var socket = io.connect('http://localhost', 8888);
-socket.on('connect', function () {
-    socket.emit('gimmehashtags');
-});
-
-  socket.on('hashtag', function (data) {
-    el = document.createElement('a');
-    el.href = '/'+data.text;
-    el.innerHTML = '#'+data.text;
-    $('#hashtags').appendChild(el);
-    $('#hashtags').scrollTop = document.querySelector('#hashtags').scrollHeight;
-  });
-
+    });
 </script>
 </body>
 </html>

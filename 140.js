@@ -52,8 +52,14 @@ app.get('/:hashtag', function (req, res) {
 });
 
 // new connection
+var clients = [];
 io.sockets.on('connection', function (socket) {
 
+    clients.push(socket);
+    if (clients.length == 2) {
+        io.sockets.emit('go');
+    }
+    
     // client ask for hashtags
     socket.on('gimmehashtags', function () {
         twit.stream('statuses/sample', { language : 'en' }, function(stream) {
