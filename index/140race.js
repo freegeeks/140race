@@ -1,9 +1,22 @@
 $(document).keyup(function(e) {
-      if (e.keyCode == 13) {
+      if (e.keyCode == 13) {  // enter
 
-      moveTrack("1900", 6000)
+      //moveTrack("1900", 6000)
 
-      }   // enter
+        $( ".player_1" ).removeClass("p1_anim").addClass("winner");
+        $( ".player_2" ).removeClass("p2_anim").addClass("loser");
+
+        //$( ".div_winner" ).show();
+        
+        setInterval(function() {
+            $( ".div_loser" ).fadeIn(500);
+        }, 300);      
+
+      moveTrack("0", 60000)
+
+
+
+      } 
 });
 
 
@@ -32,18 +45,35 @@ function moveTrack(position, speedy) {
 
 setInterval(function() {
     moveTrack("1400", 6000)
-}, 200);
+}, 6000);
+
 
 
 
 $( ".login" ).on( "click", function() {
     $( this ).slideUp();
+
+  $( ".player_1" ).addClass("p1_anim");
+  $( ".player_2" ).addClass("p2_anim");
+  moveTrack("1400", 6000);
+
 });
 
 
 
-// Game page tabs
+
 $(".tap").on('touchstart mousedown',function(e){
     moveTrack("250")
 })
 
+
+
+// to be removed
+var number = 1 + Math.floor(Math.random() * 60);
+setInterval(function() {
+  var number = 1 + Math.floor(Math.random() * 60);
+  var n2 = number + 8
+  $('.p1').text(number);
+  $('.p2').text(n2);
+},
+400);

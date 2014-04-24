@@ -58,8 +58,6 @@ body, html {
 }
 /* reset */
 
-
-
 .login {
 	z-index: 102;
 	position: fixed;
@@ -71,7 +69,6 @@ body, html {
 	background-size: 100%;
 	cursor: pointer;
 }
-
 .tap {
 	z-index: 101;
 	position: fixed;
@@ -80,7 +77,6 @@ body, html {
 	width: 100%;
 	height: 100%;
 }
-
 
 header {
 	width: 100%;
@@ -93,8 +89,6 @@ header {
 	-moz-box-shadow:    0px 5px 26px 0px rgba(0, 0, 0, 1);
 	box-shadow:         0px 5px 26px 0px rgba(0, 0, 0, 1);
 }
-
-
 section {
 	background: #5b5833;
 	float: left;
@@ -122,34 +116,6 @@ section {
 
 
 
-@keyframes track-bg {
-from { top: -100%; }
-    to { top: 0; }
-}
-
-
-
-/*
-@-webkit-keyframes track-bg {
-from { top: -300px; }
-    to { top: 0; }
-}
-@-moz-keyframes track-bg {
-from { top: -300px; }
-    to { top: 0; }
-}
-@-o-keyframes track-bg {
-from { top: -300px; }
-    to { top: 0; }
-}
-@keyframes track-bg {
-from { top: -300px; }
-    to { top: 0; }
-}
-*/
-
-
-
 
 .player_1 {
 	background: url(img/p1.png) no-repeat top center;
@@ -159,11 +125,6 @@ from { top: -300px; }
 	width: 80px;
 	height: 200px;
 	z-index: 100;
-
-	animation:         p_one 6s ease-out infinite;
-	-webkit-animation: p_one 6s ease-out infinite;
-	-moz-animation:    p_one 6s ease-out infinite;
-	-o-animation:      p_one 6s ease-out infinite;
 }
 
 .player_2 {
@@ -175,18 +136,25 @@ from { top: -300px; }
 	height: 200px;
 	z-index: 100;
 
+
+}
+.p1_anim {
+	animation:         p_one 6s ease-out infinite;
+	-webkit-animation: p_one 6s ease-out infinite;
+	-moz-animation:    p_one 6s ease-out infinite;
+	-o-animation:      p_one 6s ease-out infinite;
+}
+.p2_anim {
 	animation:         p_two 6s ease-out infinite;
 	-webkit-animation: p_two 6s ease-out infinite;
 	-moz-animation:    p_two 6s ease-out infinite;
-	-o-animation:      p_two 6s ease-out infinite;
+	-o-animation:      p_two 6s ease-out infinite;	
 }
-
-
 @keyframes p_one {
 	0%   { bottom: 15%; }
 	10%   { bottom: 20%; }
 	30%   { bottom: 15%; }
-	80%   { bottom: 25%; }
+	70%   { bottom: 25%; }
 	100%   { bottom: 15%; }
 }
 @keyframes p_two {
@@ -196,17 +164,13 @@ from { top: -300px; }
 	70%   { bottom: 20%; }
 	100%   { bottom: 15%; }
 }
-
-
-
 @-webkit-keyframes p_one {
 	0%   { bottom: 15%; }
 	10%   { bottom: 20%; }
 	30%   { bottom: 15%; }
-	80%   { bottom: 25%; }
+	70%   { bottom: 25%; }
 	100%   { bottom: 15%; }
 }
-
 @-webkit-keyframes p_two {
 	0%   { bottom: 15%; }
 	10%   { bottom: 30%; }
@@ -224,14 +188,33 @@ from { top: -300px; }
 	text-align: center;
 	font-size: .7rem;
 }
+.counter {
+	position: fixed;
+	width: 20%;
+	background: url(img/counter.png) center no-repeat;
+	background-size: 100%;
+	height: 100px;
+	left: 50%;
+	margin-left: -10%;
+	z-index: 104;
+	line-height: 110px;
+	text-align: center;
+	font-size: 1.5rem;
+	font-weight: bold;
+}
 .score {
 	text-align: center;
 	width: 100%;
 }
+
+.userInfo:nth-child(2) {
+	float: right;
+	margin-right: 10px;
+	}
 .userInfo:nth-child(2) .score{
 	float: left;
 	margin-right: 10px;
-	}
+}
 .username {
 	width: 100%;
 	display: block;
@@ -260,8 +243,6 @@ from { top: -300px; }
 .user2 {
 	background: #c64c56;
 }
-
-
 .twitter {
 	width: 45%;
 	background: rgba(255, 212, 0, .2);
@@ -275,4 +256,60 @@ from { top: -300px; }
 	padding: 5%;
 	color: #fff;
 
+}
+
+
+
+
+.winner {
+	bottom: 140%;
+ -webkit-transition: all .5s ease-in;
+       -moz-transition: all .5s ease-in;
+         -o-transition: all .5s ease-in; 
+}
+.loser {
+	bottom: 140%;
+ -webkit-transition: all .9s ease-in;
+       -moz-transition: all .9s ease-in;
+         -o-transition: all .9s ease-in; 
+}
+
+
+.div_winner, .div_loser {
+	z-index: 101;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, .8);
+	z-index: 105;
+	display: none;
+	text-align: center;
+}
+
+.div_winner span {
+	padding: 40px 20px;
+	margin: 50px auto 0 auto;
+	width: 70%;
+	display: table;
+	color: #fff;
+	font-size: 2rem;
+	background: url(img/trophy.png) no-repeat center 20px #4099ff;
+	background-size: 50%;
+	padding-top: 180px;
+	border-radius: 10px;
+}
+
+.div_loser span{
+	padding: 40px 20px;
+	margin: 50px auto 0 auto;
+	width: 70%;
+	display: table;
+	color: #fff;
+	font-size: 2rem;
+	background: url(img/loser.png) no-repeat center 20px #c64c56;
+	background-size: 50%;
+	padding-top: 180px;
+	border-radius: 10px;
 }
