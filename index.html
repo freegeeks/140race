@@ -1,23 +1,99 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <script src="/socket.io/socket.io.js"></script>
-  <style>
-    #hashtags a {
-      padding: 3px;
-      float: left;
-      width: 200px;
-      display: block;
-    }
-    #hashtags {
-      overflow: auto;
-      height: 180px;
-      width: 200px;
-    }
-  </style>
+   <title>140 Race</title>
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta charset="utf-8">
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+
+<div class="base">
+
+<div class="login none">
+	<div class="header">
+		<img src="/img/logo.png" class="logo">
+		<span class="login-bt">Login</span>
+	</div>
+</div>
+
+<div class="welcome none">
+	<div class="header">
+		<img src="/img/logo.png" class="logo">
+		<h2 class="title">Welcome!</h2>
+		<p class="username">#re2005</p>
+		<h3 class="title-s">Waiting other player to connect</h3>
+	</div>
+</div>
+
+<div class="preparing">
+	<div class="header">
+		<img src="/img/logo.png" class="logo">
+		<p class="x"> X </p>
+		<div class="users">
+			<p class="username">#re2005</p>
+			<p class="username">#opponent</p>
+		</div>
+		<h3 class="title-s">Get ready!</h3>
+		<span id="score" class="preparing-counter">0</span>
+
+		<div id="hashtag">
+        </div>
+
+	</div>
+</div>
+
+<!-- Close BASE -->
+</div>
+
+
+
+
+<div class="wrap_body none">
+<div class="header">
+	<div class="userInfo user1">
+		<span class="username">#re2005</span>
+		<span class="speed p1">74</span>
+		<span class="score">5234</span>
+	</div>
+	<div class="counter">
+		140
+	</div>
+	<div class="userInfo user2">
+		<span class="username">#renansaddam</span>
+		<span class="speed p2">45</span>
+		<span class="score">74222</span>
+	</div>
+</div>
+<section>
+	<div class="track-wrap">
+		<div class="twitter">
+			<p>Renatexx</p>
+		</div>
+		<div class="player_1"></div>
+		<div class="player_2"></div>
+		<div class="track"></div>	
+	</div>
+</section>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/140race.js"></script>
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
   <script>
     /*
     * Add JS here at the bottom of the page
@@ -84,6 +160,4 @@
       $('#hashtags').scrollTop = document.querySelector('#hashtags').scrollHeight;
     });
   </script>
-  <h1>140 seconds Twitter Race</h1>
-  <div id="hashtags"></div>
 </html>

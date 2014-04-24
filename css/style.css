@@ -1,0 +1,437 @@
+/*
+	HackBattle 140 Rce
+	2014
+*/
+
+/* reset */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  position: relative;
+  font-family: 'bariol_regular', Arial;
+  -webkit-tap-highlight-color: transparent;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section{display: block;}
+ul{list-style: none;}
+a{text-decoration: none;}
+@font-face {
+	font-family: 'bariol_regular';
+	src: url('/bariol_regular-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+    font-family: 'bariol_bold';
+    src: url('/bariol_bold-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+body, html {
+	width: 100%;
+	min-width: 300px;
+}
+body {
+	max-width: 320px;
+	margin: auto;
+	overflow: hidden;
+}
+.wrap_body {
+	float: left;
+	width: 100%;
+}
+/* Disable iOS Users Select/Copy page content */
+#layout{
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+	tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+::selection { background: transparent; }
+::-moz-selection { background: transparent; }
+ /* Exceptions for forms */
+.searchBox input, #login-form {
+	-webkit-touch-callout: normal;
+    -webkit-user-select: normal;
+}
+/* reset */
+
+
+
+
+.base {
+	z-index: 102;
+	width: 100%;
+	height: 100%;
+	background: url(img/base.png) top center no-repeat;
+	background-size: 100%;
+	min-height: 500px;
+}
+
+.header {
+	background: rgba(30, 30, 30, .95);
+	width: 100%;
+	float: left;
+	z-index: 99;
+	border-bottom: 2px solid #fff;
+	-webkit-box-shadow: 0px 5px 26px 0px rgba(0, 0, 0, 1);
+	-moz-box-shadow:    0px 5px 26px 0px rgba(0, 0, 0, 1);
+	box-shadow:         0px 5px 26px 0px rgba(0, 0, 0, 1);
+}
+.header .logo {
+	margin: auto;
+	display: table;
+	width: 50%;
+	margin: 25px auto;
+}
+.title {
+	color: #fff;
+	font-size: 2rem;
+	text-align: center;
+	display: block;
+}
+.title-s {
+	color: #fff;
+	font-size: 1.2rem;
+	width: 50%;
+	text-align: center;
+	display: block;
+	margin: auto;
+	padding-bottom: 20px;
+	clear: both;
+}
+
+.base .username {
+	width: 50%;
+	padding: 6px 0;
+	margin: 5px auto 0 auto;
+	display: table;
+	color: #fff;
+	text-align: center;
+	font-size: 1.1rem;
+}
+
+
+
+
+
+
+.login-bt {
+	width: 50%;
+	background: #4099ff;
+	border-radius: 10px;
+	padding: 6px 0;
+	margin: auto;
+	display: table;
+	color: #fff;
+	text-align: center;
+	font-size: 1.4rem;
+	cursor: pointer;
+}
+
+
+
+
+
+/*  GAME   */
+section {
+	background: #5b5833;
+	float: left;
+	margin-top: 100px;
+	width: 100%;
+	position: fixed;
+	overflow: hidden;
+	height: 100%;
+}
+.track-wrap {
+    position:relative;
+    width:300px;
+    margin: auto;
+    height: 100%;
+    overflow:hidden;
+}
+.track {
+	position:absolute;
+	width: 100%;
+	height: 2000px;
+	bottom: -30px;
+	background: url(img/track.png) repeat-y;
+	background-size: 100%;
+}
+.player_1 {
+	background: url(img/p1.png) no-repeat top center;
+	background-size: 100%;
+	position: absolute;
+	left: 60px;
+	width: 80px;
+	height: 200px;
+	z-index: 100;
+}
+
+.player_2 {
+	background: url(img/p2.png) no-repeat top center;
+	background-size: 100%;
+	position: absolute;
+	right: 65px;
+	width: 80px;
+	height: 200px;
+	z-index: 100;
+}
+.p1_anim {
+	animation:         p_one 6s ease-out infinite;
+	-webkit-animation: p_one 6s ease-out infinite;
+	-moz-animation:    p_one 6s ease-out infinite;
+	-o-animation:      p_one 6s ease-out infinite;
+}
+.p2_anim {
+	animation:         p_two 6s ease-out infinite;
+	-webkit-animation: p_two 6s ease-out infinite;
+	-moz-animation:    p_two 6s ease-out infinite;
+	-o-animation:      p_two 6s ease-out infinite;	
+}
+@keyframes p_one {
+	0%   { bottom: 15%; }
+	10%   { bottom: 20%; }
+	30%   { bottom: 15%; }
+	70%   { bottom: 25%; }
+	100%   { bottom: 15%; }
+}
+@keyframes p_two {
+	0%   { bottom: 15%; }
+	10%   { bottom: 30%; }
+	30%   { bottom: 15%; }
+	70%   { bottom: 20%; }
+	100%   { bottom: 15%; }
+}
+@-webkit-keyframes p_one {
+	0%   { bottom: 15%; }
+	10%   { bottom: 20%; }
+	30%   { bottom: 15%; }
+	70%   { bottom: 25%; }
+	100%   { bottom: 15%; }
+}
+@-webkit-keyframes p_two {
+	0%   { bottom: 15%; }
+	10%   { bottom: 30%; }
+	30%   { bottom: 15%; }
+	70%   { bottom: 20%; }
+	100%   { bottom: 15%; }
+}
+.userInfo {
+	float: left;
+	width: 40%;
+	padding: 0 5% 3% 5%;
+	color: #fff;
+	text-align: center;
+	font-size: .7rem;
+}
+.counter {
+	position: fixed;
+	width: 20%;
+	max-width: 160px;
+	background: url(img/counter.png) center no-repeat;
+	background-size: 90%;
+	height: 60px;
+	left: 50%;
+	margin-left: -10%;
+	z-index: 104;
+	line-height: 67px;
+	text-align: center;
+	font-size: 1.5rem;
+	font-weight: bold;
+	top: 40px;
+}
+.score {
+	text-align: center;
+	width: 100%;
+	font-size: 1rem;
+}
+
+.userInfo:nth-child(2) {
+	float: right;
+	margin-right: 10px;
+	}
+.userInfo:nth-child(2) .score{
+	float: left;
+	margin-right: 10px;
+}
+.username {
+	width: 100%;
+	display: block;
+	font-size: .9rem;
+}
+.speed {
+	width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	border: 5px solid #fa0000;
+	background: #fff;
+	color: #000;
+	font-weight: bold;
+	display: block;
+	line-height: 30px;
+	margin: 5px auto;
+	text-align: center;
+	font-size: 1.3rem;
+}
+.user1 {
+	background: #4099ff;
+}
+
+.user2 {
+	background: #c64c56;
+}
+.twitter {
+	width: 45%;
+	background: rgba(255, 212, 0, .2);
+	display: none;
+	position: absolute;
+	left: 50%;
+	margin-left: -27%;
+	z-index: 103;
+	font-size: .7rem;
+	border-radius: 6px;
+	padding: 5%;
+	color: #fff;
+}
+/*  GAME   */
+
+
+
+
+
+
+
+
+/*  PLAY   */
+.winner {
+	bottom: 140%;
+ -webkit-transition: all .5s ease-in;
+       -moz-transition: all .5s ease-in;
+         -o-transition: all .5s ease-in; 
+}
+.loser {
+	bottom: 140%;
+ -webkit-transition: all .9s ease-in;
+       -moz-transition: all .9s ease-in;
+         -o-transition: all .9s ease-in; 
+}
+.div_winner, .div_loser {
+	z-index: 101;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, .8);
+	z-index: 105;
+	display: none;
+	text-align: center;
+}
+.div_winner span {
+	padding: 40px 20px;
+	margin: 50px auto 0 auto;
+	width: 70%;
+	max-width: 260px;
+	display: table;
+	color: #fff;
+	font-size: 2rem;
+	background: url(img/trophy.png) no-repeat center 20px #4099ff;
+	background-size: 50%;
+	padding-top: 180px;
+	border-radius: 10px;
+}
+.div_loser span{
+	padding: 40px 20px;
+	margin: 50px auto 0 auto;
+	width: 70%;
+	max-width: 260px;
+	display: table;
+	color: #fff;
+	font-size: 2rem;
+	background: url(img/loser.png) no-repeat center 20px #c64c56;
+	background-size: 50%;
+	padding-top: 180px;
+	border-radius: 10px;
+}
+/*  PLAY   */
+
+
+
+
+
+
+
+.preparing .users{
+	float: left;
+	width: 100%;
+	margin: -32px 0 50px 0;
+}
+.preparing .username {
+	width: 30%;
+	float: left;
+	margin: 5px 22px;
+	padding: 3px 10px;
+	font-size: .8rem;
+	background: #4099ff;
+	border-radius: 6px;
+}
+.preparing .username:last-child {
+	background: #ffd400;
+}
+
+.preparing .x {
+	position: relative;
+	color: #fff;
+	width: 100%;
+	font-weight: bold;
+	font-size: 1.4rem;
+	text-align: center;
+}
+.preparing-counter {
+	width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	border: 3px solid #fff;
+	background: #222;
+	color: #fff;
+	font-weight: bold;
+	display: block;
+	line-height: 30px;
+	margin: 0 auto 15px auto;
+	text-align: center;
+	font-size: 1.3rem;
+}
+.preparing .title-s {
+	padding-bottom: 10px;
+}
+
+
+#hashtag a {
+	float: left;
+	padding: 20px 0;
+	border-bottom:1px solid #818181;
+	display: block;
+	color: #fff;
+	text-decoration: none;
+	width: 100%;
+	text-align: center;
+}
+
+
+
+
+
+.none {
+	display: none;
+}
