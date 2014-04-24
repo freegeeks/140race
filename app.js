@@ -111,6 +111,12 @@ io.sockets.on('connection', function (socket) {
                           console.log(p2Hash+': '+points);
                         });
                       }
+
+                      clients[0].get('points', function (err, p1) {
+                        clients[1].get('points', function (err, p2) {
+                          io.sockets.emit('points', {p1: p1, p2: p2});
+                        });
+                      });
                     }
                   }
                 });
