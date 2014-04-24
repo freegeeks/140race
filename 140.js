@@ -59,6 +59,13 @@ io.sockets.on('connection', function (socket) {
     if (clients.length == 2) {
         io.sockets.emit('go');
     }
+
+    socket.set('index',clients.length - 1);
+    socket.on('disconnect', function () {
+        socket.get('index', function (err, index) {
+            delete clients[index];
+        });
+    });
     
     // client ask for hashtags
     socket.on('gimmehashtags', function () {
