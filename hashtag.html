@@ -68,7 +68,7 @@
   socket.on('tweet', function (data) {
     var tweet = $('<p />').text(data.text);
     $('.tweets').append(tweet);
-    $('.tweets').css('margin-top', 300 - $('.tweets').height());
+    $('.tweets').css('margin-top', 600 - $('.tweets').height());
   });
 
   socket.on('score', function (data) {
@@ -77,7 +77,7 @@
     
     var playerOneTop = parseInt($('.player_1').css('top'), 10);
     var playerTwoTop = parseInt($('.player_2').css('top'), 10);
-    $('.player_1').css('top', playerOneTop - data.score));
+    $('.player_1').css('top', playerOneTop - data.score);
     $('.player_2').css('top', playerTwoTop - data.o_score);
   });
   </script>
