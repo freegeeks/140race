@@ -1,17 +1,44 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <script src="/socket.io/socket.io.js"></script>
-  <style>
-    #tweets {
-      overflow: auto;
-      height: 400px;
-      width: 600px;
-    }
-  </style>
+   <title>140 Race</title>
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta charset="utf-8">
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+
+<div class="base">
+
+<div class="wrap_body">
+<div class="header">
+	<div class="userInfo user1">
+		<span class="username">#re2005</span>
+		<span class="speed p1">74</span>
+		<span class="score">5234</span>
+	</div>
+	<div class="counter">
+		140
+	</div>
+	<div class="userInfo user2">
+		<span class="username">#renansaddam</span>
+		<span class="speed p2">45</span>
+		<span class="score">74222</span>
+	</div>
+</div>
+<section>
+	<div class="track-wrap">
+		<div class="twitter">
+			<p>Renatexx</p>
+		</div>
+		<div class="player_1"></div>
+		<div class="player_2"></div>
+		<div class="track"></div>	
+	</div>
+</section>
+</div>
+
   <script>
     /*
     * Add JS here at the bottom of the page
@@ -83,7 +110,5 @@
     $('#score').innerHTML = data.score;
   });
   </script>
-  <h1>140 seconds Twitter Race</h1>
-  <h2 id="score"></h2>
-  <div id="tweets"></div>
+  </body>
 </html>
