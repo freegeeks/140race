@@ -69,7 +69,7 @@
         $('.welcome').removeClass('none');
         $('.preparing').addClass('none');
 
-        var socket = io.connect('http://localhost', 8888);
+        var socket = io.connect(location.protocol + '//' + location.hostname, 8888);
         // waiting is over
         socket.on('go', function () {
             $('.login').addClass('none');
