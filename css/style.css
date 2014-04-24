@@ -417,6 +417,12 @@ section {
 }
 
 
+#hashtags {
+    overflow: auto;
+    height: 220px;
+    display: block;
+}
+
 #hashtags a {
 	float: left;
 	padding: 20px 0;

@@ -69,8 +69,7 @@
               el = document.createElement('a');
               el.href = '/'+data.text;
               el.innerHTML = '#'+data.text;
-              $('#hashtags').append(el);
-              $('#hashtags').scrollTop = document.querySelector('#hashtags').scrollHeight;
+              $('#hashtags').prepend(el);
             });
 
         });
