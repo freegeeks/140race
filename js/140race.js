@@ -39,6 +39,6 @@ var number = 1 + Math.floor(Math.random() * 60);
 setInterval(function() {
     var number = 1 + Math.floor(Math.random() * 60);
     var n2 = number + 8
-    $('.p1').text(number);
-    $('.p2').text(n2);
+    //$('.p1').text(number);
+    //$('.p2').text(n2);
 }, 400);
