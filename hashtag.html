@@ -33,7 +33,7 @@
 		<div class="player_1"></div>
 		<div class="player_2"></div>
 		<div class="track"></div>	
-    <div id="tweets"></div>
+    <div class="tweets"></div>
 	</div>
 </section>
 </div>
@@ -63,13 +63,13 @@
   var socket = io.connect('http://localhost', 8888);
   socket.on('connect', function () {
       socket.emit('gimmetweets', { hashtag: hashtag });
-      startGame((new Date()).getTime());
+      // startGame((new Date()).getTime());
   });
 
   socket.on('tweet', function (data) {
     var tweet = $('<p />').text(data.text);
-    $('#tweets').append(tweet);
-    $('#tweets')[0].scrollTop = document.querySelector('#tweets').scrollHeight;
+    $('.tweets').append(tweet);
+    $('.tweets').css('margin-top', 300 - $('.tweets').height());
   });
 
   socket.on('score', function (data) {

@@ -168,6 +168,10 @@ section {
 	background: url(../img/track.png) repeat-y;
 	background-size: 100%;
 }
+.tweets {
+	position:absolute;
+	width: 100%;
+}
 .player_1 {
 	background: url(../img/p1.png) no-repeat top center;
 	background-size: 100%;
@@ -177,7 +181,6 @@ section {
 	height: 200px;
 	z-index: 100;
 }
-
 .player_2 {
 	background: url(../img/p2.png) no-repeat top center;
 	background-size: 100%;
