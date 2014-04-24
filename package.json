@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "twitter": "0.2.9",
-    "socket.io": "*"
+    "socket.io": "*",
+    "express": "*"
   }
 }
