@@ -447,3 +447,13 @@ section {
 .none {
 	display: none;
 }
+
+
+
+.tweets p{
+	background-color: cornsilk;
+	opacity: .7;
+	padding: 15px;
+	margin-top: 15px;
+	border-radius: 3px;
+}
