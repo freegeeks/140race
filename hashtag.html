@@ -68,8 +68,8 @@
 
   socket.on('tweet', function (data) {
     var tweet = $('<p />').text(data.text);
-    $('.tweets').append(tweet);
-    $('.tweets').css('margin-top', 600 - $('.tweets').height());
+    $('.tweets').prepend(tweet);
+    //$('.tweets').css('margin-top', 600 - $('.tweets').height());
   });
 
   socket.on('score', function (data) {
