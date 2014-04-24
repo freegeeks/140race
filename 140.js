@@ -38,20 +38,22 @@ io.sockets.on('connection', function (socket) {
             if (data.text !== undefined) {
               if (data.entities.hashtags) {
                 for (key in data.entities.hashtags) {
-                  io.sockets.emit('hashtag', {text: data.entities.hashtags[key].text});
+                  io.sockets.emit('hashtag', { text: data.entities.hashtags[key].text});
                 }
               }
             }
           });
         });
-
-
-
     });
 
     // When new hashtag joins
-    socket.on('hashtag', function(data) {
+    socket.on('gimmetweets', function(data) {
         socket.set('hashtag', data.hashtag, function () {});
+        twit.stream('statuses/filter', { language: 'en', track: data.hashtag}, function(stream) { 
+          stream.on('data', function(data) {
+              socket.emit('tweet',  { text: data.text });
+          });
+        });
     });
 
 });
